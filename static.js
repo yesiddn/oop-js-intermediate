@@ -29,5 +29,40 @@ const juan = {
 // Si se imprime this en la funcion se obtiene un array ['addCourse', f]
 // Y si se imprime this.approveCourses se obtiene undefined, esto porque this no hace referencia al objeto juan, sino al array ['addCourse', f]
 
-console.log(Object.getOwnPropertyDescriptors(juan)); // {name: {…}, age: {…}, aprovedCourses: {…}, addCourse: {…}} // name: {value: "Juanito", writable: true, enumerable: true, configurable: true}, ...
+// console.log(Object.getOwnPropertyDescriptors(juan)); // {name: {…}, age: {…}, aprovedCourses: {…}, addCourse: {…}} // name: {value: "Juanito", writable: true, enumerable: true, configurable: true}, ...
 
+Object.defineProperty(juan, 'navigator', {
+  value: 'Chrome',
+  enumerable: false, // No se muestra en el array de propiedades, por ejemplo con Object.keys() pero si en Object.getOwnPropertyNames()
+  writable: true,
+  configurable: true,
+});
+
+Object.defineProperty(juan, 'editor', {
+  value: 'VSCode',
+  enumerable: true,
+  writable: false, // No se puede modificar el VALOR de la propiedad pero si se puede eliminar (delete juan.editor -> true)
+  configurable: true,
+});
+
+Object.defineProperty(juan, 'terminal', {
+  value: 'WSL',
+  enumerable: true,
+  writable: true,
+  configurable: false, // Impide que se puedan eliminar propiedades de un objeto (delete juan.terminal -> false)
+});
+
+Object.defineProperty(juan, 'pruebaNasa', {
+  value: 'extraterrestres',
+  enumerable: false,
+  writable: false,
+  configurable: false,
+});
+
+Object.seal(juan); // Cambia en todas las propiedades del objeto el atributo configurable a false, es decir, no se pueden eliminar propiedades del objeto
+
+Object.freeze(juan); // Cambia en todas las propiedades del objeto el atributo configurable y writable a false, es decir, no se pueden eliminar propiedades del objeto y no se pueden modificar los valores de las propiedades
+
+console.log(Object.getOwnPropertyDescriptors(juan));
+
+// Con estas propiedades de Object se puede mejorar el encapsulamiento de los objetos.
