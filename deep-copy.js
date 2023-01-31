@@ -50,3 +50,12 @@ function deepCopy(subject) {
 
   return copySubject;
 }
+
+// Tu reto es crear una función que aplique Object.freeze a todos los objetos anidados de forma recursiva para así realmente lograr bloquear todo el objeto. A esto se le conoce comunmente como deepFreeze.
+function deepFreeze(obj) {
+  // Tu código aquí 👈
+  for (let prop in obj) {
+    if (typeof obj[prop] === 'object') deepFreeze(obj[prop]);
+  }
+  return Object.freeze(obj);
+}
