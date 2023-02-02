@@ -36,20 +36,7 @@ function createStudent({
         console.warn('Tu nombre debe contener al menos 1 carácter.');
       }
     },
-    chageName(newName) {
-      private['_name'] = newName;
-    },
   };
-
-  Object.defineProperty(public, 'readName', {
-    writable: false,
-    configurable: false,
-  });
-
-  Object.defineProperty(public, 'ChangeName', {
-    writable: false,
-    configurable: false,
-  });
 
   return public;
 }
